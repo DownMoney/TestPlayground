@@ -40,9 +40,12 @@ export function next(state) {
             .set('winner', entries.first());
     }
 
+    const round = state.getIn(['vote', 'round'], 0) + 1;
+
     return state.merge({
         vote: Map({
-            pair: entries.take(2)
+            pair: entries.take(2),
+            round: round
         }),
         entries: entries.skip(2)
     });

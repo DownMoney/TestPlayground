@@ -72,7 +72,8 @@ describe('reducer logic', () => {
             expect(nextState).to.equal(Map({
                 entries: movies.skip(2),
                 vote: Map({
-                    pair: movies.take(2)
+                    pair: movies.take(2),
+                    round: 1
                 })
             }));
         });

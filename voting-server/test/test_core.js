@@ -49,7 +49,8 @@ describe('app logic', () => {
             expect(nextState).to.equal(Map({
                 entries: movies.skip(2),
                 vote: Map({
-                    pair: movies.take(2)
+                    pair: movies.take(2),
+                    round: 1
                 })
             }));
 
@@ -62,7 +63,8 @@ describe('app logic', () => {
                     tally: Map({
                         'Movie 1': 5,
                         'Movie 2': 1
-                    })
+                    }),
+                    round: 1
                 }),
                 entries: List.of('Movie 3', 'Movie 4', 'Movie 5')
             });
@@ -71,7 +73,8 @@ describe('app logic', () => {
 
             expect(nextState).to.equal(Map({
                 vote: Map({
-                    pair: List.of('Movie 3', 'Movie 4')
+                    pair: List.of('Movie 3', 'Movie 4'),
+                    round: 2
                 }),
                 entries: List.of('Movie 5', 'Movie 1')
             }));
@@ -94,7 +97,8 @@ describe('app logic', () => {
 
             expect(nextState).to.equal(Map({
                 vote: Map({
-                    pair: List.of('Movie 3', 'Movie 4')
+                    pair: List.of('Movie 3', 'Movie 4'),
+                    round: 1
                 }),
                 entries: List.of('Movie 5', 'Movie 1', 'Movie 2')
             }));
