@@ -168,6 +168,19 @@ describe('app logic', () => {
                 entries: List()
             }));
         });
+
+        it('should not allow voting for non existing entry', () => {
+            const state = Map({
+                vote: Map({
+                    pair: List.of('Movie 1', 'Movie 2')
+                }),
+                entries: List()
+            });
+
+            const nextState = vote(state, 'Non existing movie');
+
+            expect(nextState.getIn(['vote', 'tally', 'Non existing movie'])).to.equal(undefined);
+        });
     });
 
 });
