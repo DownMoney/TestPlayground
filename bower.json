@@ -1,0 +1,22 @@
+{
+  "name": "TestPlayground",
+  "homepage": "https://github.com/DownMoney/TestPlayground",
+  "description": "A test site for bootstrap and bower",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "test"
+  ],
+  "authors": [
+    "Michael Lotkowski"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
