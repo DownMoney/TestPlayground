@@ -19,7 +19,6 @@ function vote(state, entry) {
 
 function resetVote(state) {
     const hasVoted = state.get('hasVoted');
-    const currentPair = state.getIn(['vote', 'pair'], List());
     const round = state.getIn(['vote', 'round']);
     const lastRound = state.get('lastRound');
     console.log(state);
