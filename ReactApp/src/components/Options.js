@@ -6,6 +6,8 @@ import {
     Text
 } from 'react-native';
 
+import Row from './Row';
+
 export default class Options extends Component {
 
     constructor(props) {
@@ -30,7 +32,7 @@ export default class Options extends Component {
             <View style={styles.container}>
                 <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={(rowData) => <Text>{rowData}</Text>}
+                    renderRow={(rowData) => <Row name={rowData}/>}
                 />
             </View>
         );
