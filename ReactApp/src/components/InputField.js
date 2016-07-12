@@ -15,7 +15,7 @@ export default class InputField extends Component {
             text: 'Placeholder'
         };
     }
-    
+
     render() {
         return (
             <View style={styles.container}>
@@ -23,7 +23,7 @@ export default class InputField extends Component {
                            onChangeText={(text) => this.setState({text})}
                            value={this.state.text}
                 />
-                <TouchableHighlight onPress={() => {this.props.add({name: this.state.text})}} style={styles.addButton}>
+                <TouchableHighlight onPress={() => {this.props.add(this.state.text)}} style={styles.addButton}>
                     <Text>Add</Text>
                 </TouchableHighlight>
             </View>

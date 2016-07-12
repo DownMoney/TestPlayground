@@ -72,7 +72,7 @@ export function vote(state, name, userID) {
 export function add(state, entry) {
     console.log(entry);
     return state.merge(Map({
-        entries: state.get('entries').concat(entry.name)
+        entries: state.get('entries').concat(entry)
     }));
 }
 
