@@ -8,6 +8,7 @@ export function setState(state) {
 export function add(entry) {
     console.log(entry);
     return {
+        meta: {remote: true},
         type: 'ADD',
         entry
     }

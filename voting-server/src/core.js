@@ -55,7 +55,7 @@ export function next(state) {
 export function vote(state, name, userID) {
     var canVote = true;
 
-    if(state.has('voted')){
+    if (state.has('voted')) {
         canVote = !(state.get('voted').includes(userID));
     }
 
@@ -67,6 +67,13 @@ export function vote(state, name, userID) {
     else {
         return state;
     }
+}
+
+export function add(state, entry) {
+    console.log(entry);
+    return state.merge(Map({
+        entries: state.get('entries').concat(entry.name)
+    }));
 }
 
 export function reset(state) {
