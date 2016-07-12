@@ -51,7 +51,9 @@ describe('app logic', () => {
                 vote: Map({
                     pair: movies.take(2),
                     round: 1
-                })
+                }),
+                voted: List()
+
             }));
 
         });
@@ -76,7 +78,9 @@ describe('app logic', () => {
                     pair: List.of('Movie 3', 'Movie 4'),
                     round: 2
                 }),
-                entries: List.of('Movie 5', 'Movie 1')
+                entries: List.of('Movie 5', 'Movie 1'),
+                voted: List()
+
             }));
 
         });
@@ -100,7 +104,8 @@ describe('app logic', () => {
                     pair: List.of('Movie 3', 'Movie 4'),
                     round: 1
                 }),
-                entries: List.of('Movie 5', 'Movie 1', 'Movie 2')
+                entries: List.of('Movie 5', 'Movie 1', 'Movie 2'),
+                voted: List()
             }));
         });
 
@@ -132,10 +137,11 @@ describe('app logic', () => {
                 vote: Map({
                     pair: List.of('Movie 1', 'Movie 2')
                 }),
-                entries: List()
+                entries: List(),
+                voted: List()
             });
 
-            const nextState = vote(state, 'Movie 1');
+            const nextState = vote(state, 'Movie 1', 1);
 
             expect(nextState).to.equal(Map({
                 vote: Map({
@@ -144,7 +150,8 @@ describe('app logic', () => {
                         'Movie 1': 1
                     })
                 }),
-                entries: List()
+                entries: List(),
+                voted: List.of(1)
             }));
 
         });
@@ -157,10 +164,11 @@ describe('app logic', () => {
                         'Movie 1': 1
                     })
                 }),
-                entries: List()
+                entries: List(),
+                voted: List()
             });
 
-            const nextState = vote(state, 'Movie 1');
+            const nextState = vote(state, 'Movie 1', 1);
 
             expect(nextState).to.equal(Map({
                 vote: Map({
@@ -169,7 +177,8 @@ describe('app logic', () => {
                         'Movie 1': 2
                     })
                 }),
-                entries: List()
+                entries: List(),
+                voted: List.of(1)
             }));
         });
 
@@ -185,6 +194,56 @@ describe('app logic', () => {
 
             expect(nextState.getIn(['vote', 'tally', 'Non existing movie'])).to.equal(undefined);
         });
+
+        it('should append the voted list on new vote', () => {
+            const state = Map({
+                vote: Map({
+                    pair: List.of('Movie 1', 'Movie 2')
+                }),
+                entries: List(),
+                voted: List()
+            });
+
+            const nextState = vote(state, 'Movie 1', 1);
+            const nextState2 = vote(nextState, 'Movie 1', 2);
+
+            expect(nextState2).to.equal(Map({
+                vote: Map({
+                    pair: List.of('Movie 1', 'Movie 2'),
+                    tally: Map({
+                        'Movie 1': 2
+                    })
+                }),
+                entries: List(),
+                voted: List.of(1, 2)
+            }));
+        });
+
+
+        it('should only allow one vote per user', () => {
+            const state = Map({
+                vote: Map({
+                    pair: List.of('Movie 1', 'Movie 2')
+                }),
+                entries: List(),
+                voted: List()
+            });
+
+            const nextState = vote(state, 'Movie 1', 1);
+            const nextState2 = vote(nextState, 'Movie 1', 1);
+
+            expect(nextState2).to.equal(Map({
+                vote: Map({
+                    pair: List.of('Movie 1', 'Movie 2'),
+                    tally: Map({
+                        'Movie 1': 1
+                    })
+                }),
+                entries: List(),
+                voted: List.of(1)
+            }));
+        });
+
     });
 
 });

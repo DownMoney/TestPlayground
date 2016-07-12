@@ -7,12 +7,14 @@ import {
 } from 'react-addons-test-utils';
 import {Voting} from '../../src/components/Voting';
 import {expect} from 'chai';
+import {List} from 'immutable';
+
 
 describe('Voting', () => {
 
     it('renders a pair of buttons', () => {
         const component = renderIntoDocument(
-            <Voting pair={["Trainspotting", "28 Days Later"]}/>
+            <Voting pair={["Trainspotting", "28 Days Later"]} voted={List()}/>
         );
         const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
 
@@ -27,7 +29,8 @@ describe('Voting', () => {
 
         const component = renderIntoDocument(
             <Voting pair={["Trainspotting", "28 Days Later"]}
-                    vote={vote}/>
+                    vote={vote}
+                    voted={List()}/>
         );
         const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
         Simulate.click(buttons[0]);
@@ -38,7 +41,9 @@ describe('Voting', () => {
     it('disables buttons when user has voted', () => {
         const component = renderIntoDocument(
             <Voting pair={["Trainspotting", "28 Days Later"]}
-                    hasVoted="Trainspotting"/>
+                    hasVoted="Trainspotting"
+                    voted={List.of(1)}
+                    userID={1}/>
         );
         const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
 
@@ -50,7 +55,8 @@ describe('Voting', () => {
     it('adds label to the voted entry', () => {
         const component = renderIntoDocument(
             <Voting pair={["Trainspotting", "28 Days Later"]}
-                    hasVoted="Trainspotting"/>
+                    hasVoted="Trainspotting"
+                    voted={List()}/>
         );
         const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
 
@@ -73,7 +79,8 @@ describe('Voting', () => {
         const pair = ['Trainspotting', '28 Days Later'];
         const container = document.createElement('div');
         let component = ReactDOM.render(
-            <Voting pair={pair}/>,
+            <Voting pair={pair} voted={List()}
+            />,
             container
         );
 
@@ -82,7 +89,7 @@ describe('Voting', () => {
 
         pair[0] = 'Sunshine';
         component = ReactDOM.render(
-            <Voting pair={pair}/>,
+            <Voting pair={pair} voted={List()}/>,
             container
         );
         firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];

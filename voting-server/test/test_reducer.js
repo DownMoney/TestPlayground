@@ -30,10 +30,12 @@ describe('reducer logic', () => {
                 vote: Map({
                     pair: List.of('Movie 1', 'Movie 2')
                 }),
-                entries: List()
+                entries: List(),
+                voted: List()
             });
 
             const action = {
+                meta: {userID: 1},
                 type: 'VOTE',
                 entry: 'Movie 1'
             };
@@ -47,7 +49,8 @@ describe('reducer logic', () => {
                         'Movie 1': 1
                     })
                 }),
-                entries: List()
+                entries: List(),
+                voted: List.of(1)
             }));
 
         });
@@ -74,7 +77,8 @@ describe('reducer logic', () => {
                 vote: Map({
                     pair: movies.take(2),
                     round: 1
-                })
+                }),
+                voted: List()
             }));
         });
 
@@ -90,15 +94,25 @@ describe('reducer logic', () => {
             const actions = [
                 {type: 'SET_ENTRIES', entries: ['Movie 1', 'Movie 2']},
                 {type: 'NEXT'},
-                {type: 'VOTE', entry: 'Movie 1'},
-                {type: 'VOTE', entry: 'Movie 2'},
-                {type: 'VOTE', entry: 'Movie 1'},
+                {
+                    meta: {userID: 1},
+                    type: 'VOTE', entry: 'Movie 1'
+                },
+                {
+                    meta: {userID: 2},
+                    type: 'VOTE', entry: 'Movie 2'
+                },
+                {
+                    meta: {userID: 3},
+                    type: 'VOTE', entry: 'Movie 1'
+                },
                 {type: 'NEXT'}
             ];
             const finalState = actions.reduce(reducer, Map());
 
             expect(finalState).to.equal(Map({
-                winner: 'Movie 1'
+                winner: 'Movie 1',
+                voted: List.of(1, 2, 3)
             }));
         });
 

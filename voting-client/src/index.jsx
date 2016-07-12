@@ -10,11 +10,21 @@ import remoteActionMiddleware from './remote_action_middleware';
 import App from './components/App';
 import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
+import cookie from 'react-cookie';
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
-socket.on('state', state =>
-    store.dispatch(setState(state))
-);
+socket.on('state', (state) => {
+
+    if (cookie.load('userId')) {
+        state['userID'] = cookie.load('userId');
+    }
+    else {
+        cookie.save('userId', state['userID'], {path: '/'});
+    }
+
+    store.dispatch(setState(state));
+});
+
 
 const createStoreWithMiddleware = applyMiddleware(
     remoteActionMiddleware(socket)

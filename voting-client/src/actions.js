@@ -5,9 +5,12 @@ export function setState(state) {
     };
 }
 
-export function vote(entry) {
+export function vote(entry, userID) {
     return {
-        meta: {remote: true},
+        meta: {
+            remote: true,
+            userID: userID
+        },
         type: 'VOTE',
         entry
     };
