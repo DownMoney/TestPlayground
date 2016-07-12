@@ -10,11 +10,19 @@ export default class Options extends Component {
 
     constructor(props) {
         super(props);
-
+        console.log(this.props);
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+            dataSource: ds.cloneWithRows(this.props.entries)
         };
+    }
+
+    componentWillReceiveProps(props){
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+        this.setState ({
+            dataSource: ds.cloneWithRows(props.entries)
+        });
     }
 
     render() {

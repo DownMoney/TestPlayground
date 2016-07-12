@@ -12,9 +12,12 @@ import {
     View
 } from 'react-native';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
 import reducer from './src/reducer';
 import remoteActionMiddleware from './src/remote_action_middleware';
+import App from './src/components/App';
+import {Router, routerReducer, Route, Container, Animations, Schema} from 'react-native-redux-router';
+
 
 if (window.navigator && Object.keys(window.navigator).length == 0) {
     window = Object.assign(window, {navigator: {userAgent: 'ReactNative'}});
@@ -37,15 +40,16 @@ const createStoreWithMiddleware = applyMiddleware(
     remoteActionMiddleware(socket)
 )(createStore);
 
-const store = createStoreWithMiddleware(reducer);
-store.dispatch(setState({test: 'Hello'}));
+const store = createStoreWithMiddleware(combineReducers({reducer, routerReducer}));
 
 
 class ReactApp extends Component {
     render() {
         return (
             <Provider store={store}>
-                <VotingContainer />
+                <Router>
+                    <Route name="home" path="/" component={VotingContainer}/>
+                </Router>
             </Provider>
         );
     }

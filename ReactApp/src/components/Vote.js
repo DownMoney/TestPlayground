@@ -26,8 +26,10 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
+    let entries = !!state.reducer.get('entries') ? state.reducer.get('entries').toJS() : [];
+    console.log(entries);
     return {
-        test: state.get('test')
+        entries: entries
     };
 }
 
