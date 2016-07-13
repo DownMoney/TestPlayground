@@ -1,13 +1,19 @@
-import React, {Component} from 'react';
+import React, {
+    Component
+} from 'react';
+
 import {
     View,
-    Text
+    Text,
+    TouchableHighlight
 } from 'react-native';
 
 export default class Row extends Component {
     render() {
         return (
-            <Text>{this.props.name}</Text>
+            <TouchableHighlight onPress={() => {this.props.vote(this.props.name)}}>
+                <Text>{this.props.name}</Text>
+            </TouchableHighlight>
         );
     }
 };
