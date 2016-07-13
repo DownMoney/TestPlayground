@@ -26,6 +26,20 @@ describe('Options', () => {
             const component = shallow(<Options entries={entries}/>);
 
             expect(component.find(ListView).props().dataSource._dataBlob.length).to.equal(entries.length);
+            expect(component.find(ListView).props().dataSource._dataBlob).to.equal(entries);
+        });
+
+        it('should update the list when props are updated', () => {
+            let entries = ['Opt 1', 'Opt 2', 'Opt 3'];
+
+            const component = shallow(<Options entries={entries}/>);
+
+            let newEntries = ['Opt 4', 'Opt 5'];
+
+            component.setProps({entries: newEntries});
+
+            expect(component.find(ListView).props().dataSource._dataBlob.length).to.equal(newEntries.length);
+            expect(component.find(ListView).props().dataSource._dataBlob).to.equal(newEntries);
         });
     });
 });
