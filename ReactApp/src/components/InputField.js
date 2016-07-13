@@ -23,7 +23,7 @@ export default class InputField extends Component {
                            onChangeText={(text) => this.setState({text})}
                            value={this.state.text}
                 />
-                <TouchableHighlight onPress={() => {this.props.add(this.state.text)}} style={styles.addButton}>
+                <TouchableHighlight ref="addButton" onPress={() => {this.props.add(this.state.text)}} style={styles.addButton}>
                     <Text>Add</Text>
                 </TouchableHighlight>
             </View>
