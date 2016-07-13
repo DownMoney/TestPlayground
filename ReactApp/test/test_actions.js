@@ -33,10 +33,10 @@ describe('Actions', () => {
         it('should have a vote function', () => {
             let entry = 'test';
 
-            const action = vote(entry);
+            const action = vote(entry, '1');
 
             expect(action).to.eqls({
-                meta: {remote: true},
+                meta: {remote: true, userID: '1'},
                 type: 'VOTE',
                 entry
             });
