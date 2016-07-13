@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Text
+} from 'react-native';
 import * as actions from '../actions';
 import {connect} from 'react-redux';
 
@@ -30,7 +34,8 @@ function mapStateToProps(state) {
     console.log(state.reducer.get('userID'));
     return {
         entries: entries,
-        userID: state.reducer.get('userID')
+        userID: state.reducer.get('userID'),
+        tally: state.reducer.getIn(['vote', 'tally'])
     };
 }
 

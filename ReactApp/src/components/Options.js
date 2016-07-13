@@ -20,6 +20,13 @@ export default class Options extends Component {
         };
     }
 
+    getVotes(entry) {
+        if (this.props.tally && this.props.tally.has(entry)) {
+            return this.props.tally.get(entry);
+        }
+        return 0;
+    }
+
     componentWillReceiveProps(props) {
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -29,8 +36,10 @@ export default class Options extends Component {
     }
 
     renderRow(rowData) {
+        let votes = this.getVotes(rowData);
+
         return (
-            <Row {...this.props} name={rowData}/>
+            <Row {...this.props} name={rowData} votes={votes}/>
         );
     }
 
