@@ -18,7 +18,6 @@ import remoteActionMiddleware from './src/remote_action_middleware';
 import App from './src/components/App';
 import {Router, routerReducer, Route, Container, Animations, Schema} from 'react-native-redux-router';
 
-
 if (window.navigator && Object.keys(window.navigator).length == 0) {
     window = Object.assign(window, {navigator: {userAgent: 'ReactNative'}});
 }
