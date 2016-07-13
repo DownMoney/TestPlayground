@@ -13,6 +13,10 @@ export function add(entry) {
     };
 }
 
-export function vote(entry){
-    return {};
+export function vote(entry) {
+    return {
+        meta: {remote: true},
+        type: 'VOTE',
+        entry
+    };
 }
