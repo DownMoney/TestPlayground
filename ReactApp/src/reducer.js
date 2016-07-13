@@ -5,6 +5,10 @@ function setState(state, newState) {
     return state.merge(newState);
 }
 
+function vote(state, entry){
+    return state;
+}
+
 export default function (state = Map(), action) {
     switch (action.type) {
         case 'SET_STATE':
