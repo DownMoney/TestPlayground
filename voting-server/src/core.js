@@ -59,14 +59,9 @@ export function next(state) {
 export function vote(state, name, userID) {
     var canVote = true;
 
-    if (state.has('voted')) {
-        canVote = !(state.get('voted').includes(userID));
-    }
 
-    if (state.get('entries').includes(name) && canVote) {
-        return state.updateIn(['vote', 'tally', name], 0, tally => tally + 1).merge(Map({
-            voted: state.get('voted').concat(userID)
-        }));
+    if (state.get('entries').includes(name)) {
+        return state.setIn(['vote', 'tally', userID], name);
     }
     else {
         return state;

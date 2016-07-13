@@ -21,10 +21,17 @@ export default class Options extends Component {
     }
 
     getVotes(entry) {
-        if (this.props.tally && this.props.tally.has(entry)) {
-            return this.props.tally.get(entry);
+        let count = 0;
+
+        if (this.props.tally) {
+
+            this.props.tally.forEach((o) => {
+                if (o == entry) {
+                    count++;
+                }
+            });
         }
-        return 0;
+        return count;
     }
 
     componentWillReceiveProps(props) {
