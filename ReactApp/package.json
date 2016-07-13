@@ -37,6 +37,7 @@
     "react-cookie": "^0.4.7",
     "react-dom": "^15.2.1",
     "react-native": "0.29.0",
+    "react-native-device-uuid": "^1.2.0",
     "react-native-redux-router": "^1.0.7",
     "react-redux": "^4.4.5",
     "react-router": "^2.0.0",

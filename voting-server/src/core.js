@@ -51,7 +51,9 @@ export function next(state) {
     //     entries: entries.skip(2)
     // });
 
-    return state;
+    return state.merge({
+        voted: List()
+    });
 }
 
 export function vote(state, name, userID) {

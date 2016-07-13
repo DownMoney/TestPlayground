@@ -13,9 +13,9 @@ export function add(entry) {
     };
 }
 
-export function vote(entry) {
+export function vote(entry, userID) {
     return {
-        meta: {remote: true},
+        meta: {remote: true, userID},
         type: 'VOTE',
         entry
     };

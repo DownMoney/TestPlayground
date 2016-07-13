@@ -25,14 +25,25 @@ if (window.navigator && Object.keys(window.navigator).length == 0) {
 import io from 'socket.io-client/socket.io';
 import {setState} from './src/actions';
 import {VotingContainer} from './src/components/Vote';
+import DeviceUUID from 'react-native-device-uuid';
 
 
 const socket = io('http://localhost:8090', {
     transports: ['websocket']
 });
 
+
 socket.on('state', (state) => {
-    store.dispatch(setState(state));
+    DeviceUUID.getUUID()
+        .then((uuid) => {
+            console.log(uuid);
+            state['userID'] = uuid;
+            store.dispatch(setState(state));
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
 });
 
 const createStoreWithMiddleware = applyMiddleware(
